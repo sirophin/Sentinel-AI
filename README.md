@@ -111,10 +111,25 @@ My Aadhaar is [AADHAAR_1].
 
 # 👨‍💻 Authors
 
-- Siro
+- Sirophin T X
 
 ---
 
 # 🔒 Final Note
 
 Sentinel-AI ensures that sensitive information never leaves the local system in readable form, enabling safe and privacy-focused AI interactions.
+
+## 📸 Screenshots
+
+### Extension Dashboard
+
+<img width="974" height="474" alt="Screenshot From 2026-05-23 21-32-35" src="https://github.com/user-attachments/assets/4e347469-fe08-49ee-a910-426f759b6bf0" />
+
+### Prompt Before Masking
+<img width="973" height="472" alt="Screenshot From 2026-05-23 21-34-45" src="https://github.com/user-attachments/assets/91ffd17b-7e63-4b50-8382-1c888409982c" />
+
+### Prompt After Masking
+<img width="973" height="472" alt="Screenshot From 2026-05-23 21-35-45" src="https://github.com/user-attachments/assets/603d27cd-0e0b-4f9d-95e3-45a3a4700142" />
+
+### Extension
+<img width="1006" height="570" alt="Screenshot From 2026-05-23 21-37-01" src="https://github.com/user-attachments/assets/081df5bc-f723-4b46-a0db-8b5589339ac9" />
