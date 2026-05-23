@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Sentinel-AI",
+  "version": "2.0",
+  "description": "Real-time PII masking proxy for LLMs",
+
+  "permissions": [
+    "scripting",
+    "storage",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://*.openai.com/*",
+    "http://127.0.0.1:8000/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://*.openai.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://*.openai.com/*"
+      ],
+      "js": ["bridge.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

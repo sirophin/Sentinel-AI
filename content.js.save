@@ -1,0 +1,76 @@
+alert("Sentinel Loaded")
+// 🔴 ALWAYS use 127.0.0.1 (NOT localhost)
+const BACKEND = "http://127.0.0.1:8000";
+
+// Prevent double execution
+let isProcessing = false;
+
+// Detect Enter key
+window.addEventListener("keydown", async function (event) {
+
+    if (event.key !== "Enter" || event.shiftKey) return;
+    if (isProcessing) return;
+
+    const inputBox = document.querySelector("div[contenteditable='true'], textarea");
+
+    if (!inputBox) {
+        console.log("Sentinel-AI: Input box not found");
+        return;
+    }
+
+    let originalText = inputBox.innerText || inputBox.value;
+
+    if (!originalText.trim()) return;
+
+    console.log("Sentinel-AI: Intercepted Enter key");
+    console.log("Original:", originalText);
+
+    isProcessing = true;
+
+    try {
+        // 🔥 Call backend
+        const res = await fetch(`${BACKEND}/process`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text: originalText })
+        });
+
+        console.log("STATUS:", res.status);
+
+        const data = await res.json();
+        console.log("DATA:", data);
+
+        let maskedText = data.processed_text;
+
+        if (!maskedText) {
+            console.log("No masking applied");
+            isProcessing = false;
+            return;
+        }
+
+        console.log("Masked:", maskedText);
+
+        // 🔥 Replace text in UI
+        if (inputBox.isContentEditable) {
+            inputBox.innerText = maskedText;
+        } else {
+            inputBox.value = maskedText;
+        }
+
+        // 🔥 Trigger Enter again (send message)
+        setTimeout(() => {
+            inputBox.dispatchEvent(new KeyboardEvent("keydown", {
+                key: "Enter",
+                bubbles: true
+            }));
+        }, 50);
+
+    } catch (err) {
+        console.error("Sentinel-AI Error:", err);
+    }
+
+    isProcessing = false;
+
+}, true);
