@@ -111,7 +111,7 @@ My Aadhaar is [AADHAAR_1].
 
 # 👨‍💻 Authors
 
-- Sirophin T X
+- Sirophin T X and Sabari
 
 ---
 
